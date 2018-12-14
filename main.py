@@ -51,7 +51,8 @@ def send_info(message):
             markup.add(btn)
             i = i + 1
         else:
-            bot.reply_to(message, text, reply_markup=markup)
+            break
+    bot.reply_to(message, text, reply_markup=markup)
 
 if __name__ == '__main__':
     bot.polling()
