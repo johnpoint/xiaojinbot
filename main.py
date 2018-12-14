@@ -34,23 +34,26 @@ def send_help_info(message):
 
 @bot.message_handler(commands=['get'])
 def send_info(message):
-    text = message.text
-    text = text.lstrip('/get').lstrip('@'+botname).lstrip()
-    num,data = getinfo.get_url(text)
-    if data == 404:
-        bot.send_message(message.chat.id,'没有你想要的节目哦，选个别的关键词吧~')
+    if ' ' not in message.text :
+        bot.send_message(message.chat.id,'昂？你好像啥都没有说，找啥呀...')
     else:
-        if num/3 > 5:
-            num = 5
+        text = message.text
+        text = text.lstrip('/get').lstrip('@'+botname).lstrip()
+        num,data = getinfo.get_url(text)
+        if data == 404:
+            bot.send_message(message.chat.id,'没有你想要的节目哦，选个别的关键词吧~')
         else:
-            num = num/3
-        num = int(num)
-        markup = types.InlineKeyboardMarkup()
-        text = '找到如下节目:'
-        for i in range(num):
-            btn = types.InlineKeyboardButton(data[i]["title"], url='%s'%data[i]["url"])
-            markup.add(btn)
-            bot.reply_to(message, text, reply_markup=markup)
+            if num/3 > 5:
+                num = 5
+            else:
+                num = num/3
+            num = int(num)
+            markup = types.InlineKeyboardMarkup()
+            text = '找到如下节目:'
+            for i in range(num):
+                btn = types.InlineKeyboardButton(data[i]["title"], url='%s'%data[i]["url"])
+                markup.add(btn)
+                bot.reply_to(message, text, reply_markup=markup)
 
 if __name__ == '__main__':
     bot.polling()
