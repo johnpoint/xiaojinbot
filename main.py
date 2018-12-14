@@ -1,9 +1,10 @@
 #!/bin/python3
 
 import telebot
-#from telebot import types
+from telebot import types
 
 import config
+import getinfo
 
 TOKEN = config.TOKEN
 botname = config.name
@@ -31,8 +32,25 @@ def send_welcome(message):
 def send_help_info(message):
     bot.send_message(message.chat.id,'/new - 获取最新一期节目\n/get [关键词] - 通过节目标题搜索节目')
 
-#TODO
-#@bot.message_handler(commands=['get'])
+@bot.message_handler(commands=['get'])
 def send_info(message):
     text = message.text
     text = text.lstrip('/get').lstrip('@'+botname).lstrip()
+    num,data = getinfo.get_url(text)
+    if data == 404:
+        bot.send_message(message.chat.id,'没有你想要的节目哦，选个别的关键词吧~')
+    else:
+        i = 0
+        markup = types.InlineKeyboardMarkup()
+        text = '找到如下节目:'
+        while i < num or i <= 5 :
+            no=i+1
+            no=str(no)
+            text = text + '\n' + '%s. '%no + data[i]["name"]
+            btn = types.InlineKeyboardButton(i+1, url='%s'%data[i]["url"])
+            markup.add(btn)
+            i = i + 1
+        bot.reply_to(message, text, reply_markup=markup)
+
+if __name__ == '__main__':
+    bot.polling()
