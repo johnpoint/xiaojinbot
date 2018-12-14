@@ -40,14 +40,14 @@ def send_info(message):
     if data == 404:
         bot.send_message(message.chat.id,'没有你想要的节目哦，选个别的关键词吧~')
     else:
-        if num >= 5:
+        if num > 5:
             num = 5
         markup = types.InlineKeyboardMarkup()
         text = '找到如下节目:'
         for i in range(num):
             btn = types.InlineKeyboardButton(data[i]["title"], url='%s'%data[i]["url"])
             markup.add(btn)
-    bot.reply_to(message, text, reply_markup=markup)
+            bot.reply_to(message, text, reply_markup=markup)
 
 if __name__ == '__main__':
     bot.polling()
