@@ -40,18 +40,16 @@ def send_info(message):
     if data == 404:
         bot.send_message(message.chat.id,'没有你想要的节目哦，选个别的关键词吧~')
     else:
-        i = 0
+        if num >= 5:
+            num = 5
         markup = types.InlineKeyboardMarkup()
         text = '找到如下节目:'
-        while i < num or i <= 5 :
+        for i in rang(num):
             no=i+1
             no=str(no)
             text = text + '\n' + '%s. '%no + data[i]["title"]
             btn = types.InlineKeyboardButton(i+1, url='%s'%data[i]["url"])
             markup.add(btn)
-            i = i + 1
-        else:
-            break
     bot.reply_to(message, text, reply_markup=markup)
 
 if __name__ == '__main__':
