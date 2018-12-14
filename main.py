@@ -46,7 +46,7 @@ def send_info(message):
         while i < num or i <= 5 :
             no=i+1
             no=str(no)
-            text = text + '\n' + '%s. '%no + data[i]["tittle"]
+            text = text + '\n' + '%s. '%no + data[i]["title"]
             btn = types.InlineKeyboardButton(i+1, url='%s'%data[i]["url"])
             markup.add(btn)
             i = i + 1
