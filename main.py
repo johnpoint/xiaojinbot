@@ -44,7 +44,7 @@ def send_info(message):
             num = 5
         markup = types.InlineKeyboardMarkup()
         text = '找到如下节目:'
-        for i in rang(num):
+        for i in range(num):
             no=i+1
             no=str(no)
             text = text + '\n' + '%s. '%no + data[i]["title"]
