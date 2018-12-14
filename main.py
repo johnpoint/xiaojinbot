@@ -50,7 +50,8 @@ def send_info(message):
             btn = types.InlineKeyboardButton(i+1, url='%s'%data[i]["url"])
             markup.add(btn)
             i = i + 1
-        bot.reply_to(message, text, reply_markup=markup)
+        else:
+            bot.reply_to(message, text, reply_markup=markup)
 
 if __name__ == '__main__':
     bot.polling()
