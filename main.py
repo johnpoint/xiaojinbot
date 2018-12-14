@@ -46,8 +46,8 @@ def send_info(message):
         while i < num or i <= 5 :
             no=i+1
             no=str(no)
-            text = text + '\n' + '%s. '%no + data[i]["name"]
-            btn = types.InlineKeyboardButton(i+1, url='%s'%data[i]["url"])
+            text = text + '\n' + '%s. '%no + data[i]['name']
+            btn = types.InlineKeyboardButton(i+1, url='%s'%data[i]['url'])
             markup.add(btn)
             i = i + 1
         bot.reply_to(message, text, reply_markup=markup)
