@@ -45,10 +45,7 @@ def send_info(message):
         markup = types.InlineKeyboardMarkup()
         text = '找到如下节目:'
         for i in range(num):
-            no=i+1
-            no=str(no)
-            text = text + '\n' + '%s. '%no + data[i]["title"]
-            btn = types.InlineKeyboardButton(i+1, url='%s'%data[i]["url"])
+            btn = types.InlineKeyboardButton(data[i]["title"], url='%s'%data[i]["url"])
             markup.add(btn)
     bot.reply_to(message, text, reply_markup=markup)
 
