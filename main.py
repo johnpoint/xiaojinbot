@@ -44,6 +44,7 @@ def send_info(message):
             num = 5
         else:
             num = num/3
+        num = int(num)
         markup = types.InlineKeyboardMarkup()
         text = '找到如下节目:'
         for i in range(num):
