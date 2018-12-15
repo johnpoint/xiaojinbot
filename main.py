@@ -7,8 +7,10 @@ import config
 import getinfo
 
 TOKEN = config.TOKEN
-botname = config.name
+botname = config.NAME
 bot = telebot.TeleBot(TOKEN)
+
+print('bot 正在运行...')
 
 @bot.message_handler(content_types=['new_chat_members'])
 def welcome_new(message):

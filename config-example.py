@@ -2,4 +2,4 @@
 
 TOKEN=''
 ADMINID=''
-name=''
+NAME=''
