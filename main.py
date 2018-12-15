@@ -56,15 +56,16 @@ def send_info(message):
             bot.reply_to(message, text, reply_markup=markup)
 
 @bot.message_handler(commands=['new'])
-num,data=getinfo.get_url('.')
-if data == 404:
-    bot.send_message(message.chat.id,'API貌似出现了一些问题，稍后试试吧！')
-else:
-    text='最新一期的节目在这:'
-    markup = types.InlineKeyboardMarkup()
-    btn = types.InlineKeyboardButton(data[num-1]["title"], url='%s'%data[num-1]["url"])
-    markup.add(btn)
-    bot.reply_to(message, text, reply_markup=markup)
+def send_new(message):
+    num,data=getinfo.get_url('.')
+    if data == 404:
+        bot.send_message(message.chat.id,'API貌似出现了一些问题，稍后试试吧！')
+    else:
+        text='最新一期的节目在这:'
+        markup = types.InlineKeyboardMarkup()
+        btn = types.InlineKeyboardButton(data[num-1]["title"], url='%s'%data[num-1]["url"])
+        markup.add(btn)
+        bot.reply_to(message, text, reply_markup=markup)
 
 if __name__ == '__main__':
     bot.polling()
