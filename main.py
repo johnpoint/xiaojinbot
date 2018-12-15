@@ -61,9 +61,10 @@ def send_new(message):
     if data == 404:
         bot.send_message(message.chat.id,'API貌似出现了一些问题，稍后试试吧！')
     else:
+        i = int(num/3)
         text='最新一期的节目在这:'
         markup = types.InlineKeyboardMarkup()
-        btn = types.InlineKeyboardButton(data[num-1]["title"], url='%s'%data[num-1]["url"])
+        btn = types.InlineKeyboardButton(data[i-1]["title"], url='%s'%data[i-1]["url"])
         markup.add(btn)
         bot.reply_to(message, text, reply_markup=markup)
 
