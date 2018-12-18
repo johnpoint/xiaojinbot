@@ -3,3 +3,4 @@
 TOKEN=''
 ADMINID=''
 NAME=''
+CHATID=''

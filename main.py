@@ -2,19 +2,21 @@
 
 import telebot
 from telebot import types
+from apscheduler.schedulers.background import BackgroundScheduler
 
 import config
 import getinfo
 
 TOKEN = config.TOKEN
 botname = config.NAME
+chatid = config.CHATID
 bot = telebot.TeleBot(TOKEN)
 
 print('bot 正在运行...')
 
 @bot.message_handler(content_types=['new_chat_members'])
 def welcome_new(message):
-    if message.chat.id == -1001376188698:
+    if message.chat.id == chatid :
         try:
             username = message.new_chat_members[0].username
             bot.send_message(message.chat.id,'@%s 欢迎加入津津乐道听友的大家庭~\n在这里你可以尽情的与主播以及其他听友进行交流，但是要注意不要发广告哦！'%username)
@@ -70,5 +72,26 @@ def send_new(message):
         markup.add(btn)
         bot.reply_to(message, text, reply_markup=markup)
 
+def get_rss():
+    tmp = oldnum
+    oldnum,data = getinfo.get_url('.')
+    newnum = tmp
+    if oldnum == newnum :
+        pass
+    else:
+        num,data=getinfo.get_url('.')
+        if data == 404:
+            bot.send_message(chatid,'API貌似出现了一些问题，稍后试试吧！')
+        else:
+            i = int(num/3)
+            text='最新一期的节目在这:'
+            markup = types.InlineKeyboardMarkup()
+            btn = types.InlineKeyboardButton(data[i-1]["title"], url='%s'%data[i-1]["url"])
+            markup.add(btn)
+            bot.send_message(chatid,'有新的节目更新~', reply_markup=markup)
+
 if __name__ == '__main__':
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(get_rss,'interval', minutes=2)
+    scheduler.start()
     bot.polling()
