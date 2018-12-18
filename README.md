@@ -6,7 +6,7 @@ cd xiaojinbot/
 cp jinbot.service /lib/systemd/system/
 
 systemctl daemon-reload
-systemctl enable expressbot.service
+systemctl enable jinbot.service
 
 service jinbot start
 ```
