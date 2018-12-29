@@ -47,10 +47,10 @@ def send_info(message):
         if data == 404:
             bot.send_message(message.chat.id,'没有你想要的节目哦，选个别的关键词吧~')
         else:
-            if num/3 > 5:
+            if num  > 5:
                 num = 5
             else:
-                num = num/3
+                num = num
             num = int(num)
             markup = types.InlineKeyboardMarkup()
             text = '找到如下节目:'
@@ -65,30 +65,26 @@ def send_new(message):
     if data == 404:
         bot.send_message(message.chat.id,'API貌似出现了一些问题，稍后试试吧！')
     else:
-        i = int(num/3)
+        i = int(num)
         text='最新一期的节目在这:'
         markup = types.InlineKeyboardMarkup()
         btn = types.InlineKeyboardButton(data[i-1]["title"], url='%s'%data[i-1]["url"])
         markup.add(btn)
         bot.reply_to(message, text, reply_markup=markup)
 
-def get_rss():
-    tmp = oldnum
-    oldnum,data = getinfo.get_url('.')
-    newnum = tmp
-    if oldnum == newnum :
-        pass
+def send_rss():
+	f = open('new','r')
+	l = f.read()
+	f.close()
+    num,data=getinfo.get_url('.')
+    if l+1 == num:
+        i = int(num)
+        markup = types.InlineKeyboardMarkup()
+        btn = types.InlineKeyboardButton(data[i-1]["title"], url='%s'%data[i-1]["url"])
+        markup.add(btn)
+        bot.send_message(chatid, '有新的节目更新！', reply_markup=markup)
     else:
-        num,data=getinfo.get_url('.')
-        if data == 404:
-            bot.send_message(chatid,'API貌似出现了一些问题，稍后试试吧！')
-        else:
-            i = int(num/3)
-            text='最新一期的节目在这:'
-            markup = types.InlineKeyboardMarkup()
-            btn = types.InlineKeyboardButton(data[i-1]["title"], url='%s'%data[i-1]["url"])
-            markup.add(btn)
-            bot.send_message(chatid,'有新的节目更新~', reply_markup=markup)
+        pass
 
 if __name__ == '__main__':
     scheduler = BackgroundScheduler()
