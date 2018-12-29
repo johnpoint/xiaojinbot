@@ -77,17 +77,17 @@ def send_rss():
 	l = f.read()
 	f.close()
 	num,data=getinfo.get_url('.')
-    if l+1 == num:
-        i = int(num)
-        markup = types.InlineKeyboardMarkup()
-        btn = types.InlineKeyboardButton(data[i-1]["title"], url='%s'%data[i-1]["url"])
-        markup.add(btn)
-        bot.send_message(chatid, '有新的节目更新！', reply_markup=markup)
-    else:
-        pass
+	if l+1 == num:
+		i = int(num)
+		markup = types.InlineKeyboardMarkup()
+		btn = types.InlineKeyboardButton(data[i-1]["title"], url='%s'%data[i-1]["url"])
+		markup.add(btn)
+		bot.send_message(chatid, '有新的节目更新！', reply_markup=markup)
+	else:
+		pass
 
 if __name__ == '__main__':
     scheduler = BackgroundScheduler()
-    scheduler.add_job(get_rss,'interval', minutes=2)
+    scheduler.add_job(send_rss,'interval', minutes=2)
     scheduler.start()
     bot.polling()
