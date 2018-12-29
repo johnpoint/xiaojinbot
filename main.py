@@ -85,6 +85,7 @@ def send_rss():
 		bot.send_message(chatid, '有新的节目更新！', reply_markup=markup)
 		l = int(l)
 		newnum = l + 1
+        newnum = str(newnum)
 		f = open('new','w')
 		f.write(newnum)
 		f.close
