@@ -77,7 +77,7 @@ def send_rss():
 	l = f.read()
 	f.close()
 	num,data=getinfo.get_url('.')
-	if l+1 == num:
+	if int(l)+1 == num:
 		i = int(num)
 		markup = types.InlineKeyboardMarkup()
 		btn = types.InlineKeyboardButton(data[i-1]["title"], url='%s'%data[i-1]["url"])
