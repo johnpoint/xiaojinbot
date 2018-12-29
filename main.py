@@ -77,7 +77,7 @@ def send_rss():
 	l = f.read()
 	f.close()
 	num,data=getinfo.get_url('.')
-	if int(l)+1 == num:
+	if int(l) != num:
 		i = int(num)
 		markup = types.InlineKeyboardMarkup()
 		btn = types.InlineKeyboardButton(data[i-1]["title"], url='%s'%data[i-1]["url"])
@@ -88,6 +88,6 @@ def send_rss():
 
 if __name__ == '__main__':
     scheduler = BackgroundScheduler()
-    scheduler.add_job(send_rss,'interval', minutes=2)
+    scheduler.add_job(send_rss,'interval', minutes=1)
     scheduler.start()
     bot.polling()
