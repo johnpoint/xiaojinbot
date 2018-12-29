@@ -86,7 +86,7 @@ def send_rss():
 		l = int(l)
 		newnum = l + 1
 		f = open('new','w')
-		f.write('%s',%newnum)
+		f.write('%s',%(newnum))
 		f.close
 	else:
 		pass
