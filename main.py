@@ -83,6 +83,11 @@ def send_rss():
 		btn = types.InlineKeyboardButton(data[i-1]["title"], url='%s'%data[i-1]["url"])
 		markup.add(btn)
 		bot.send_message(chatid, '有新的节目更新！', reply_markup=markup)
+		l = int(l)
+		newnum = l + 1
+		f = open('new','w')
+		f.write('%s\n',newnum)
+		f.close
 	else:
 		pass
 
