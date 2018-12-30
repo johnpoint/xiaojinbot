@@ -18,7 +18,7 @@ print('bot 正在运行...')
 def welcome_new(message):
     print('新成员!')
     print(str(message.chat.id))
-    if message.chat.id == chatid :
+    if str(message.chat.id) == chatid :
         try:
             username = message.new_chat_members[0].username
             bot.send_message(message.chat.id,'@%s 欢迎加入津津乐道听友的大家庭~\n在这里你可以尽情的与主播以及其他听友进行交流，但是要注意不要发广告哦！'%username)
