@@ -20,7 +20,7 @@ def welcome_new(message):
     print(str(message.chat.id))
     if str(message.chat.id) == chatid :
         username = message.new_chat_members[0].username
-        if username == 'None':
+        if username == None:
             try:
                 userfirstname = message.new_chat_members[0].firstname
                 bot.send_message(message.chat.id,'%s 欢迎加入津津乐道听友的大家庭~\n在这里你可以尽情的与主播以及其他听友进行交流，但是要注意不要发广告哦！'%userfirstname)
