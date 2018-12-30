@@ -19,12 +19,17 @@ def welcome_new(message):
     print('新成员!')
     print(str(message.chat.id))
     if str(message.chat.id) == chatid :
-        try:
-            username = message.new_chat_members[0].username
+        username = message.new_chat_members[0].username
+        if username == 'None':
+            try:
+                userfirstname = message.new_chat_members[0].firstname
+                bot.send_message(message.chat.id,'%s 欢迎加入津津乐道听友的大家庭~\n在这里你可以尽情的与主播以及其他听友进行交流，但是要注意不要发广告哦！'%userfirstname)
+                bot.send_message(message.chat.id,'很高兴认识你，我是群内的小助手，点击\n--> /help <--\n试试吧')
+            except AttributeError:
+                bot.send_message(message.chat.id,'欢迎加入津津乐道听友的大家庭~\n在这里你可以尽情的与主播以及其他听友进行交流，但是要注意不要发广告哦！')
+                bot.send_message(message.chat.id,'很高兴认识你，我是群内的小助手，点击\n--> /help <--\n试试吧')
+        else:
             bot.send_message(message.chat.id,'@%s 欢迎加入津津乐道听友的大家庭~\n在这里你可以尽情的与主播以及其他听友进行交流，但是要注意不要发广告哦！'%username)
-            bot.send_message(message.chat.id,'很高兴认识你，我是群内的小助手，点击\n--> /help <--\n试试吧')
-        except AttributeError:
-            bot.send_message(message.chat.id,'欢迎加入津津乐道听友的大家庭~\n在这里你可以尽情的与主播以及其他听友进行交流，但是要注意不要发广告哦！')
             bot.send_message(message.chat.id,'很高兴认识你，我是群内的小助手，点击\n--> /help <--\n试试吧')
         bot.delete_message(message.chat.id,message.message_id)
     else:
