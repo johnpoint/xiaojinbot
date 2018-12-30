@@ -33,7 +33,7 @@ def welcome_new(message):
             msg1 = bot.send_message(message.chat.id,'@%s 欢迎加入津津乐道听友的大家庭~\n在这里你可以尽情的与主播以及其他听友进行交流，但是要注意不要发广告哦！'%username).message_id
             msg2 = bot.send_message(message.chat.id,'很高兴认识你，我是群内的小助手，点击\n--> /help <--\n试试吧').message_id
         bot.delete_message(message.chat.id,message.message_id)
-        time.sleep(5)
+        time.sleep(20)
         bot.delete_message(message.chat.id,msg1)
         bot.delete_message(message.chat.id,msg2)
     else:
