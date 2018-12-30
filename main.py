@@ -17,6 +17,7 @@ print('bot 正在运行...')
 @bot.message_handler(content_types=['new_chat_members'])
 def welcome_new(message):
     print('新成员!')
+    print(str(message.chat.id))
     if message.chat.id == chatid :
         try:
             username = message.new_chat_members[0].username
