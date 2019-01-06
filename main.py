@@ -2,8 +2,8 @@
 
 import telebot
 from telebot import types
-from apscheduler.schedulers.background import BackgroundScheduler
-import time
+#from apscheduler.schedulers.background import BackgroundScheduler
+#import time
 
 import config
 import getinfo
@@ -83,28 +83,28 @@ def send_new(message):
         markup.add(btn)
         bot.reply_to(message, text, reply_markup=markup)
 
-def send_rss():
-    f = open('new','r')
-    l = f.read()
-    f.close()
-    num,data=getinfo.get_url('.')
-    if int(l)+1 == num:
-        i = int(num)
-        markup = types.InlineKeyboardMarkup()
-        btn = types.InlineKeyboardButton(data[i-1]["title"], url='%s'%data[i-1]["url"])
-        markup.add(btn)
-        bot.send_message(chatid, '有新的节目更新！', reply_markup=markup)
-        l = int(l)
-        newnum = l + 1
-        newnum = str(newnum)
-        f = open('new','w')
-        f.write(newnum)
-        f.close
-    else:
-        pass
+#def send_rss():
+#    f = open('new','r')
+#    l = f.read()
+#    f.close()
+#    num,data=getinfo.get_url('.')
+#    if int(l)+1 == num:
+#        i = int(num)
+#        markup = types.InlineKeyboardMarkup()
+#        btn = types.InlineKeyboardButton(data[i-1]["title"], url='%s'%data[i-1]["url"])
+#        markup.add(btn)
+#        bot.send_message(chatid, '有新的节目更新！', reply_markup=markup)
+#        l = int(l)
+#        newnum = l + 1
+#        newnum = str(newnum)
+#        f = open('new','w')
+#        f.write(newnum)
+#        f.close
+#    else:
+#        pass
 
 if __name__ == '__main__':
-    scheduler = BackgroundScheduler()
-    scheduler.add_job(send_rss,'interval', minutes=1)
-    scheduler.start()
+#    scheduler = BackgroundScheduler()
+#    scheduler.add_job(send_rss,'interval', minutes=1)
+#    scheduler.start()
     bot.polling()
