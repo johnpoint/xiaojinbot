@@ -112,13 +112,13 @@ def send_pong(message):
 
 def send_rss():
     print('[Info] RUN rss!')
-    print('[Info] read file...')
+    print('[Info:RSS] read file...')
     f = open('new','r')
     l = f.read()
     f.close()
     num,data=getinfo.get_url('.')
     if int(l)+1 == num:
-        print('[Info] send RSS')
+        print('[Info:RSS] send RSS')
         i = int(num)
         markup = types.InlineKeyboardMarkup()
         btn = types.InlineKeyboardButton(data[i-1]["title"], url='%s'%data[i-1]["url"])
