@@ -65,9 +65,11 @@ def send_info(message):
     if ' ' not in message.text:
         bot.send_message(message.chat.id, '昂？你好像啥都没有说，找啥呀...')
     else:
+        msg = bot.send_message(message.chat.id,'查询中...').message_id
         text = message.text
         text = text.lstrip('/get').lstrip('@'+botname).lstrip()
         num, data = getinfo.get_url(text)
+        bot.delete_message(message.chat.id,msg)
         if data == 404:
             bot.send_message(message.chat.id, '没有你想要的节目哦，选个别的关键词吧~')
         else:
