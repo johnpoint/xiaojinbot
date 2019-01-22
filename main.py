@@ -87,11 +87,12 @@ def send_info(message):
 
 @bot.message_handler(commands=['new'])
 def send_new(message):
-    print('[Info] send reply for /new')
     num, data = getinfo.get_url('.')
     if data == 404:
+        print('[Error] API error')
         bot.send_message(message.chat.id, 'API貌似出现了一些问题，稍后试试吧！')
     else:
+        print('[Info] send reply for /new')
         i = int(num)
         text = '最新一期的节目在这:'
         markup = types.InlineKeyboardMarkup()
@@ -128,6 +129,6 @@ def send_rss():
 
 if __name__ == '__main__':
         scheduler = BackgroundScheduler()
-        scheduler.add_job(send_rss,'interval', minutes=10)
+        scheduler.add_job(send_rss,'interval', minutes=1)
         scheduler.start()
         bot.polling()
