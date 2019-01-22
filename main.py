@@ -108,16 +108,18 @@ def send_pong(message):
 
 def send_rss():
     print('[Info] RUN rss!')
+    print('[Info] read file...')
     f = open('new','r')
     l = f.read()
     f.close()
     num,data=getinfo.get_url('.')
     if int(l)+1 == num:
+        print('[Info] send RSS')
         i = int(num)
         markup = types.InlineKeyboardMarkup()
         btn = types.InlineKeyboardButton(data[i-1]["title"], url='%s'%data[i-1]["url"])
         markup.add(btn)
-        bot.send_message(chatid, '有新的节目更新！', reply_markup=markup)
+        bot.send_message(-1001376188698, '有新的节目更新！', reply_markup=markup)
         l = int(l)
         newnum = l + 1
         newnum = str(newnum)
