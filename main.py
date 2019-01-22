@@ -87,7 +87,9 @@ def send_info(message):
 
 @bot.message_handler(commands=['new'])
 def send_new(message):
+    msg = bot.send_message(message.chat.id,'查询中...').message_id
     num, data = getinfo.get_url('.')
+    bot.delete_message(message.chat.id,msg)
     if data == 404:
         print('[Error] API error')
         bot.send_message(message.chat.id, 'API貌似出现了一些问题，稍后试试吧！')
