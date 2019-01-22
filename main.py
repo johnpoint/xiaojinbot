@@ -4,6 +4,7 @@ import telebot
 from telebot import types
 from apscheduler.schedulers.background import BackgroundScheduler
 import time
+import datetime
 
 import config
 import getinfo
@@ -14,6 +15,8 @@ chatid = config.CHATID
 bot = telebot.TeleBot(TOKEN)
 
 print('[Info] bot running...')
+print('[Info] set time point')
+start_time = datetime.datetime.now()
 
 @bot.message_handler(content_types=['new_chat_members'])
 def welcome_new(message):
@@ -108,7 +111,9 @@ def send_new(message):
 @bot.message_handler(commands=['ping'])
 def send_pong(message):
     print('[Info] send reply for /ping')
-    bot.send_message(message.chat.id,'pong!')
+    nowtime = datetime.datetime.now()
+    uptime = (nowtime - start_time)
+    bot.send_message(message.chat.id,'pong! uptime: %s'%uptime)
 
 def send_rss():
     print('[Info] RUN rss!')
