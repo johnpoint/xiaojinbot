@@ -13,12 +13,11 @@ botname = config.NAME
 chatid = config.CHATID
 bot = telebot.TeleBot(TOKEN)
 
-print('bot 正在运行...')
-
+print('[Info] bot running...')
 
 @bot.message_handler(content_types=['new_chat_members'])
 def welcome_new(message):
-    print('新成员!')
+    print('[Info] new members')
     print(str(message.chat.id))
     if str(message.chat.id) == chatid:
         username = message.new_chat_members[0].username
@@ -49,17 +48,20 @@ def welcome_new(message):
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
+    print('[Info] send reply for /start')
     bot.send_message(message.chat.id, 'HI，终于等到你，我是小津！\n/help 获取帮助信息')
 
 
 @bot.message_handler(commands=['help'])
 def send_help_info(message):
+    print('[Info] send reply for /help')
     bot.send_message(
         message.chat.id, '/new - 获取最新一期节目\n/get [关键词] - 通过节目标题搜索节目')
 
 
 @bot.message_handler(commands=['get'])
 def send_info(message):
+    print('[Info] send reply for /get')
     if ' ' not in message.text:
         bot.send_message(message.chat.id, '昂？你好像啥都没有说，找啥呀...')
     else:
@@ -85,6 +87,7 @@ def send_info(message):
 
 @bot.message_handler(commands=['new'])
 def send_new(message):
+    print('[Info] send reply for /new')
     num, data = getinfo.get_url('.')
     if data == 404:
         bot.send_message(message.chat.id, 'API貌似出现了一些问题，稍后试试吧！')
@@ -99,9 +102,11 @@ def send_new(message):
 
 @bot.message_handler(commands=['ping'])
 def send_pong(message):
+    print('[Info] send reply for /ping')
     bot.send_message(message.chat.id,'pong!')
 
 def send_rss():
+    print('[Info] RUN rss!')
     f = open('new','r')
     l = f.read()
     f.close()
