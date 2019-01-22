@@ -133,4 +133,5 @@ if __name__ == '__main__':
         scheduler = BackgroundScheduler()
         scheduler.add_job(send_rss,'interval', minutes=1)
         scheduler.start()
+        print('[Info] start scheduler jobs...')
         bot.polling()
