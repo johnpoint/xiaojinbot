@@ -1,5 +1,5 @@
 [Unit]
-Description=A Telegram Bot for jinjinledao podcast
+Description=A Telegram Bot for jinjinledao podcast fans group
 After=network.target network-online.target nss-lookup.target
 
 [Service]
