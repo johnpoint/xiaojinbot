@@ -118,7 +118,7 @@ def send_pong(message):
 def send_rss():
     print('[Info] RUN rss!')
     print('[Info:RSS] read file...')
-    f = open('new','r')
+    f = open(config.newfile,'r')
     l = f.read()
     f.close()
     num,data=getinfo.get_url('.')
@@ -132,7 +132,7 @@ def send_rss():
         l = int(l)
         newnum = l + 1
         newnum = str(newnum)
-        f = open('new','w')
+        f = open(config.newfile,'w')
         f.write(newnum)
         f.close
     else:
