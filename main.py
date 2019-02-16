@@ -28,6 +28,8 @@ def welcome_new(message):
             try:
                 userfirstname = message.new_chat_members[0].first_name
                 userlastname = message.new_chat_members[0].last_name
+                if userlastname == None:
+                    userlasrname = ''
                 msg1 = bot.reply_to(
                     message, '%s %s 欢迎加入津津乐道听友的大家庭~\n在这里你可以尽情的与主播以及其他听友进行交流，但是要注意不要发广告哦！\nhttps://t.me/htnpodcast/44627' % (userfirstname,userlastname)).message_id
                 msg2 = bot.reply_to(
