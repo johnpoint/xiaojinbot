@@ -54,6 +54,8 @@ def send_verify(message):
     print('[Info] send reply for /verify')
     msg = bot.send_message(message.chat.id, '验证成功!欢迎加入~').message_id
     bot.delete_message(message.chat.id, message.message_id)
+    time.sleep(10)
+    bot.delete_message(message.chat.id, msg)
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
