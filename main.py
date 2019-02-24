@@ -44,6 +44,7 @@ def welcome_new(message):
             bot.delete_message(message.chat.id, message.message_id)
         time.sleep(20)
         bot.delete_message(message.chat.id, msg1)
+        time.sleep(50)
         bot.delete_message(message.chat.id, msg2)
     else:
         pass
