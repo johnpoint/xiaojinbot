@@ -42,6 +42,9 @@ def welcome_new(message):
                 message.chat.id, '@%s 欢迎加入津津乐道听友的大家庭~\n在这里你可以尽情的与主播以及其他听友进行交流，但是要注意不要发广告哦！\nhttps://t.me/htnpodcast/44627' % username).message_id
             msg2 = bot.send_message(message.chat.id, '很高兴认识你，我是群内的小助手，点击\n--> /help <--\n试试吧\n点击--> /verify <--\n完成入群验证').message_id
             bot.delete_message(message.chat.id, message.message_id)
+        time.sleep(20)
+        bot.delete_message(message.chat.id, msg1)
+        bot.delete_message(message.chat.id, msg2)
     else:
         pass
 
@@ -50,8 +53,6 @@ def send_verify(message):
     print('[Info] send reply for /verify')
     msg = bot.send_message(message.chat.id, '验证成功!欢迎加入~').message_id
     bot.delete_message(message.chat.id, message.message_id)
-    bot.delete_message(message.chat.id, msg1)
-    bot.delete_message(message.chat.id, msg2)
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
