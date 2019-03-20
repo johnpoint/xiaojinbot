@@ -22,7 +22,7 @@ start_time = datetime.datetime.now()
 def welcome_new(message):
     print('[Info] new members')
     print(str(message.chat.id))
-    bot.restrict_chat_member(chatid,message.from_user.id,until_date=None,can_send_media_messages=None,can_send_messages=True)
+    bot.restrict_chat_member(chatid,message.from_user.id,until_date=None,can_send_media_messages=False,can_send_messages=True,can_add_web_page_previews=False)
     if str(message.chat.id) == chatid:
         username = message.new_chat_members[0].username
         if username == None:
@@ -57,7 +57,7 @@ def send_verify(message):
     bot.delete_message(message.chat.id, message.message_id)
     time.sleep(10)
     bot.delete_message(message.chat.id, msg)
-    
+    bot.restrict_chat_member(chatid,message.from_user.id,until_date=None,can_send_media_messages=True,can_send_messages=True,can_add_web_page_previews=True,can_send_other_messages=True)
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
