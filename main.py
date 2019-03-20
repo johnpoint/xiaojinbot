@@ -22,7 +22,7 @@ start_time = datetime.datetime.now()
 def welcome_new(message):
     print('[Info] new members')
     print(str(message.chat.id))
-    bot.restrict_chat_member(chatid,message.from_user.id,until_date=forever,can_add_web_page_previews=None)
+    bot.restrict_chat_member(chatid,message.from_user.id,until_date=None,can_add_web_page_previews=None)
     if str(message.chat.id) == chatid:
         username = message.new_chat_members[0].username
         if username == None:
